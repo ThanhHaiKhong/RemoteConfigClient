@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "RemoteConfigClient",
     platforms: [
-        .iOS(.v15)
+		.iOS(.v15), .macOS(.v10_15)
     ],
     products: [
         .singleTargetLibrary("RemoteConfigClient"),

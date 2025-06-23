@@ -1,7 +1,7 @@
 // The Swift Programming Language
 // https://docs.swift.org/swift-book
 
-import ComposableArchitecture
+import DependenciesMacros
 
 @DependencyClient
 public struct RemoteConfigClient: Sendable {

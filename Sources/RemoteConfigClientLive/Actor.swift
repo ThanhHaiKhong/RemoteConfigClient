@@ -1,5 +1,5 @@
 //
-//  Configurator.swift
+//  RemoteConfigActor.swift
 //  RemoteConfigClient
 //
 //  Created by Thanh Hai Khong on 1/4/25.
@@ -8,9 +8,7 @@
 import RemoteConfigClient
 @preconcurrency import FirebaseRemoteConfig
 
-actor Configurator {
-    public static let shared = Configurator()
-    
+actor RemoteConfigActor {
 	private var cachedEditorChoices: [RemoteConfigClient.EditorChoice]? = nil
     private var cachedPhotoSelectionLimitNumber: Int = 20
     
@@ -29,7 +27,7 @@ actor Configurator {
 
 // MARK: - Public Methods
 
-extension Configurator {
+extension RemoteConfigActor {
     public func getEditorChoices() async throws -> [RemoteConfigClient.EditorChoice] {
         if let cachedChoices = cachedEditorChoices {
             return cachedChoices
@@ -52,7 +50,7 @@ extension Configurator {
 
 // MARK: - Supporting Methods
 
-extension Configurator {
+extension RemoteConfigActor {
     private func handleConfigUpdate() async {
         do {
             let updatedChoices = try await fetchEditorChoices()
