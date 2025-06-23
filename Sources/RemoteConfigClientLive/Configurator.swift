@@ -11,7 +11,7 @@ import RemoteConfigClient
 actor Configurator {
     public static let shared = Configurator()
     
-    private var cachedEditorChoices: [EditorChoice]? = nil
+	private var cachedEditorChoices: [RemoteConfigClient.EditorChoice]? = nil
     private var cachedPhotoSelectionLimitNumber: Int = 20
     
     public init() {
@@ -30,7 +30,7 @@ actor Configurator {
 // MARK: - Public Methods
 
 extension Configurator {
-    public func getEditorChoices() async throws -> [EditorChoice] {
+    public func getEditorChoices() async throws -> [RemoteConfigClient.EditorChoice] {
         if let cachedChoices = cachedEditorChoices {
             return cachedChoices
         }
@@ -67,7 +67,7 @@ extension Configurator {
         }
     }
     
-    nonisolated private func fetchEditorChoices() async throws -> [EditorChoice] {
+    nonisolated private func fetchEditorChoices() async throws -> [RemoteConfigClient.EditorChoice] {
         return try await withCheckedThrowingContinuation { continuation in
             RemoteConfig.remoteConfig().fetchAndActivate { status, error in
                 if let error {
@@ -91,9 +91,9 @@ extension Configurator {
         }
     }
     
-    nonisolated private func decodeEditorChoices(from json: [[String: Any]]) throws -> [EditorChoice] {
+    nonisolated private func decodeEditorChoices(from json: [[String: Any]]) throws -> [RemoteConfigClient.EditorChoice] {
         let jsonData = try JSONSerialization.data(withJSONObject: json)
-        let editorChoices = try JSONDecoder().decode([EditorChoice].self, from: jsonData)
+		let editorChoices = try JSONDecoder().decode([RemoteConfigClient.EditorChoice].self, from: jsonData)
         return editorChoices
     }
     
