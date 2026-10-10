@@ -36,7 +36,7 @@ let package = Package(
     //   .package(url: "…/RemoteConfigClient.git", from: "2.2.0")                  // no funnel
     //   .package(url: "…/RemoteConfigClient.git", from: "2.2.0", traits: ["Funnel"])
     traits: [
-        .default(enabledTraits: []),
+        .default(enabledTraits: ["Funnel"]),
         Trait(
             name: funnelTrait,
             description: "Conform RemoteConfigClient to FunnelClient's Config port."
